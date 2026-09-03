@@ -69,7 +69,7 @@ function App() {
     setAuthStatus('Authenticating...');
 
     try {
-      const response = await fetch(' https://diva-x9m9.onrender.com', {
+      const response = await fetch('https://diva-x9m9.onrender.com', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: authForm.email, password: authForm.password }),
@@ -100,7 +100,7 @@ function App() {
     
     setAuthStatus('Verifying OTP & creating account...');
     try {
-      const response = await fetch(' https://diva-x9m9.onrender.com/register/', {
+      const response = await fetch('https://diva-x9m9.onrender.com/register/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: authForm.email, password: authForm.password }),
@@ -139,7 +139,7 @@ function App() {
     formData.append('file', selectedFile);
 
     try {
-      const response = await fetch(' https://diva-x9m9.onrender.com/upload/', {
+      const response = await fetch('https://diva-x9m9.onrender.com/upload/', {
         method: 'POST',
         body: formData,
       });
@@ -166,7 +166,7 @@ function App() {
     setChatInput('');
 
     try {
-      const response = await fetch(' https://diva-x9m9.onrender.com/chat/', {
+      const response = await fetch('https://diva-x9m9.onrender.com/chat/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
