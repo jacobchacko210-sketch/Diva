@@ -1,12 +1,22 @@
+import os
+from dotenv import load_dotenv
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from passlib.context import CryptContext
 from pydantic import BaseModel
 
-# XAMPP MySQL Connection
-SQLALCHEMY_DATABASE_URL = "mysql+pymysql://avnadmin:AVNS_li22Zo5pgdU7vwZbTP_@mysql-381c14f1-jacobchacko210-33b1.k.aivencloud.com:26437/defaultdb?ssl-mode=REQUIRED"
+# 1. Load variables from the .env file (used for local development)
+load_dotenv()
 
+# 2. Fetch the database URL securely from the environment
+SQLALCHEMY_DATABASE_URL = os.getenv("SQLALCHEMY_DATABASE_URL")
+
+# 3. Add a safety check in case the environment variable is missing
+if not SQLALCHEMY_DATABASE_URL:
+    raise ValueError("No SQLALCHEMY_DATABASE_URL set in the environment variables.")
+
+# Database Setup
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
@@ -29,6 +39,7 @@ def get_password_hash(password):
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
 
+# Database Dependency
 def get_db():
     db = SessionLocal()
     try:

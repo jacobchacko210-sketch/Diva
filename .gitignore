@@ -2,3 +2,4 @@ env/
 __pycache__/
 diva-frontend/node_modules/
 diva_users.db
+.env
